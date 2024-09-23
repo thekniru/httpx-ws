@@ -46,7 +46,7 @@ class ASGIWebSocketAsyncNetworkStream(AsyncNetworkStream):
     async def __aenter__(
         self,
     ) -> typing.Tuple["ASGIWebSocketAsyncNetworkStream", bytes]:
-        self.exit_stack = contextlib.ExitStack()
+        self.exit_stack = contextlib.AsyncExitStack()
         if self._use_blocking_portal:
             self.portal = self.exit_stack.enter_context(
                 anyio.from_thread.start_blocking_portal("asyncio")
